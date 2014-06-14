@@ -1,6 +1,9 @@
 package logica;
 
+import java.awt.Point;
 import java.util.Random;
+import java.util.ArrayDeque;
+
 
 public class Campo {
 	private int x, y, bombas;
@@ -15,8 +18,18 @@ public class Campo {
 	}
 
 	public void setAberto(int i, int j) {
-		estado[i][j] = 1;
-		System.out.println("i = " + i + " j = " + j);
+		ArrayDeque<Point> fila = new ArrayDeque<Point>();
+		fila.addLast(new Point(i, j));
+		while(!fila.isEmpty()){
+			Point p = fila.pollFirst();
+			estado[p.x][p.y] = 1;
+			if(grade[p.x][p.y] == 0){
+				if(p.x > 0 && estado[p.x-1][p.y] == 0) fila.addLast(new Point(p.x-1, p.y));
+				if(p.x < x-1 && estado[p.x+1][p.y] == 0) fila.addLast(new Point(p.x+1, p.y));
+				if(p.y > 0 && estado[p.x][p.y-1] == 0) fila.addLast(new Point(p.x, p.y - 1));
+				if(p.y < y-1 && estado[p.x][p.y+1] == 0) fila.addLast(new Point(p.x, p.y + 1));
+			}
+		}
 	}
 	
 	public int getEstado(int i, int j){
@@ -89,5 +102,6 @@ public class Campo {
 			}
 			System.out.println("-> " + cont);
 		}
+		c.setAberto(0, 0);
 	}
 }
