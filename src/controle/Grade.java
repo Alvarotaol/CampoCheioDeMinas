@@ -42,4 +42,10 @@ public class Grade {
 			}
 		}
 	}
+	
+	public void clicar(int mx, int my){
+		if(mx > x && mx < x + dimq*dimx && my > y && my < dimq*dimy){
+			c.setAberto((mx - x)/dimq, (my-y)/dimq);
+		}
+	}
 }

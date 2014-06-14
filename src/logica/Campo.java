@@ -13,9 +13,14 @@ public class Campo {
 		grade = new int[x][y];
 		estado = new int[x][y];
 	}
+
+	public void setAberto(int i, int j) {
+		estado[i][j] = 1;
+		System.out.println("i = " + i + " j = " + j);
+	}
 	
 	public int getEstado(int i, int j){
-		return (grade[i][j] == 0)?1:0; //estado[i][j];
+		return estado[i][j];//(grade[i][j] == 0)?1:0;
 	}
 	
 	public int getCampo(int i, int j){

@@ -38,7 +38,9 @@ public class JogoEstado extends BasicGameState{
 
 	public void update(GameContainer arg0, StateBasedGame arg1, int arg2)
 			throws SlickException {
-		
+		if(in.isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)){
+			grade.clicar(in.getMouseX(), in.getMouseY());
+		}
 	}
 
 	@Override
