@@ -17,7 +17,7 @@ public class Campo {
 		estado = new int[x][y];
 	}
 
-	public void setAberto(int i, int j) {
+	public void abrir(int i, int j) {
 		ArrayDeque<Point> fila = new ArrayDeque<Point>();
 		fila.addLast(new Point(i, j));
 		while(!fila.isEmpty()){
@@ -29,6 +29,12 @@ public class Campo {
 				if(p.y > 0 && estado[p.x][p.y-1] == 0) fila.addLast(new Point(p.x, p.y - 1));
 				if(p.y < y-1 && estado[p.x][p.y+1] == 0) fila.addLast(new Point(p.x, p.y + 1));
 			}
+		}
+	}
+	
+	public void marcarBomba(int i, int j){
+		if(estado[i][j] == 0){
+			estado[i][j] = 2;
 		}
 	}
 	
@@ -102,6 +108,6 @@ public class Campo {
 			}
 			System.out.println("-> " + cont);
 		}
-		c.setAberto(0, 0);
+		c.abrir(0, 0);
 	}
 }

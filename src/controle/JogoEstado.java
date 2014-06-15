@@ -11,8 +11,6 @@ import org.newdawn.slick.state.StateBasedGame;
 
 public class JogoEstado extends BasicGameState{
 	private final int estado;
-	public static Circle bola;
-	public static Vector2f vel, ace;
 	public Grade grade;
 	public int dx = 16, dy = 16;
 	public Input in;
@@ -24,25 +22,26 @@ public class JogoEstado extends BasicGameState{
 	public void init(GameContainer gc, StateBasedGame arg1)
 			throws SlickException {
 		in = gc.getInput();
-		vel = new Vector2f(5, 0);
-		ace = new Vector2f(0, 0);
-		bola = new Circle(320, 60, 10);
 		grade = new Grade(10, gc.getHeight() - (gc.getWidth() - 20) * dy / dx - 10, dx, dy, (gc.getWidth() - 10) / dx);
 	}
 
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics g)
 			throws SlickException {
-		g.draw(bola);
 		grade.desenhar(in.getMouseX(), in.getMouseY(), g);
 	}
 
 	public void update(GameContainer arg0, StateBasedGame arg1, int arg2)
 			throws SlickException {
-		if(in.isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)){
+		
+	}
+
+	@Override
+	public void mouseClicked(int botão, int x, int y, int cont){
+		if(botão == Input.MOUSE_LEFT_BUTTON){
 			grade.clicar(in.getMouseX(), in.getMouseY());
 		}
 	}
-
+	
 	@Override
 	public int getID() {
 		

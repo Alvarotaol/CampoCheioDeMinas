@@ -31,6 +31,8 @@ public class Grade {
 			for (int j = 0; j < dimy; j++) {
 				if(c.getEstado(i, j) == 1){
 					g.drawString("" + c.getCampo(i, j), i*dimq + x + dimq / 4, j*dimq + y + dimq / 5);
+				} else if(c.getEstado(i, j) == 2) {
+					
 				} else {
 					if (grade[i][j].contains(mx, my)) {
 						g.setColor(Color.lightGray);
@@ -44,8 +46,8 @@ public class Grade {
 	}
 	
 	public void clicar(int mx, int my){
-		if(mx > x && mx < x + dimq*dimx && my > y && my < dimq*dimy){
-			c.setAberto((mx - x)/dimq, (my-y)/dimq);
+		if(mx > x && mx < x + dimq*dimx && my > y && my < y + dimq*dimy){
+			c.abrir((mx - x)/dimq, (my-y)/dimq);
 		}
 	}
 }

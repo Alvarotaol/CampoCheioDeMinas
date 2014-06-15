@@ -15,13 +15,17 @@ public class MenuEstado extends BasicGameState {
 	private final int largura = 250, altura = 50;
 	private int n, verm;
 	private Input in;
+	private StateBasedGame psbg;
+	
 	public MenuEstado(int estado) {
 		this.estado = estado;
 	}
+	
 	public void init(GameContainer gc, StateBasedGame sbg)
 			throws SlickException {
 		in = gc.getInput();
 		novo = new Rectangle(gc.getWidth()/2 - largura/2, gc.getHeight()/2 - altura/2, largura, altura);
+		psbg = sbg;
 	}
 
 	public void render(GameContainer gc, StateBasedGame arg1, Graphics g)
@@ -42,9 +46,6 @@ public class MenuEstado extends BasicGameState {
 			if (verm > 200){
 				verm = 200;
 			}
-			if(in.isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)){
-				sbg.enterState(1); //Sei que não é recomendável
-			}
 		} else {
 			verm -= fps;
 			if (verm < 0){
@@ -53,6 +54,12 @@ public class MenuEstado extends BasicGameState {
 		}
 	}
 
+	@Override
+	public void mouseClicked(int botão, int x, int y, int cont){
+		if(botão == Input.MOUSE_LEFT_BUTTON){
+			psbg.enterState(1); //Sei que não é recomendável
+		}
+	}
 	@Override
 	public int getID() {
 		return estado;
