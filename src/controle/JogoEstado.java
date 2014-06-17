@@ -9,7 +9,7 @@ import org.newdawn.slick.state.StateBasedGame;
 
 public class JogoEstado extends BasicGameState{
 	private final int estado;
-	private boolean derrota;
+	private boolean derrota, vitoria;
 	public Grade grade;
 	public int dx = 16, dy = 16;
 	public Input in;
@@ -36,6 +36,9 @@ public class JogoEstado extends BasicGameState{
 		if(derrota){
 			sbg.enterState(2); //Derrota
 		}
+		if(vitoria){
+			sbg.enterState(3); //Vitória
+		}
 	}
 
 	@Override
@@ -44,6 +47,9 @@ public class JogoEstado extends BasicGameState{
 			if(grade.clicar(x, y)){
 				derrota = true;
 			}
+			if (grade.venceu()) {
+				vitoria = true;
+			}
 		} else {
 			grade.marcar(x, y);
 		}
@@ -51,7 +57,6 @@ public class JogoEstado extends BasicGameState{
 	
 	@Override
 	public int getID() {
-		
 		return estado;
 	}
 

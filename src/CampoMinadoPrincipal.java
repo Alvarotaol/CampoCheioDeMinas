@@ -6,6 +6,7 @@ import org.lwjgl.*;
 import controle.Derrota;
 import controle.JogoEstado;
 import controle.MenuEstado;
+import controle.Vitória;
 
 public class CampoMinadoPrincipal extends StateBasedGame {
     public static AppGameContainer app;
@@ -14,6 +15,7 @@ public class CampoMinadoPrincipal extends StateBasedGame {
 		this.addState(new MenuEstado(0));
 		this.addState(new JogoEstado(1));
 		this.addState(new Derrota(2));
+		this.addState(new Vitória(3));
 	}
 	
 	public static void main(String[] args) {
@@ -25,7 +27,6 @@ public class CampoMinadoPrincipal extends StateBasedGame {
 		    app.setTargetFrameRate(limiteFps);
 		    app.start();
 		} catch (SlickException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

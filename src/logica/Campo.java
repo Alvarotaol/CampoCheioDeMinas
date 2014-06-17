@@ -61,6 +61,11 @@ public class Campo {
 	public int getResto(){
 		return resto;
 	}
+	
+	public int getBombas(){
+		return bombas;
+	}
+	
 	public void novoJogo(){
 		int i = 0;
 		Random gerar = new Random();

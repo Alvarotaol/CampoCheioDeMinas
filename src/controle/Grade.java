@@ -2,14 +2,14 @@ package controle;
 
 import logica.Campo;
 
-import org.newdawn.slick.Color;
-import org.newdawn.slick.Graphics;
+import org.newdawn.slick.*;
 import org.newdawn.slick.geom.Rectangle;
 
 public class Grade {
 	Rectangle[][] grade;
 	Campo c;
 	public static int x, y, dimx, dimy, dimq;
+	
 	public Grade(int x, int y, int dx, int dy, int dq) {
 		this.x = x;
 		this.y = y;
@@ -52,6 +52,7 @@ public class Grade {
 			c.marcarBomba((mx - x)/dimq, (my-y)/dimq);
 		}
 	}
+	
 	/**
 	 * @param mx x do mouse
 	 * @param my y do mouse
@@ -62,6 +63,10 @@ public class Grade {
 			return c.abrir((mx - x)/dimq, (my-y)/dimq);
 		}
 		return false;
+	}
+	
+	public boolean venceu(){
+		return c.getResto() == c.getBombas();
 	}
 	
 	public int getResto(){

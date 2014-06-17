@@ -5,11 +5,11 @@ import logica.Campo;
 import org.newdawn.slick.*;
 import org.newdawn.slick.state.*;
 
-public class Derrota extends BasicGameState {
+public class Vitória extends BasicGameState {
 	private final int estado;
 	private int tam = 100, dir = 1;
 	private boolean clicado = false;
-	public Derrota(int estado) {
+	public Vitória(int estado) {
 		this.estado = estado;
 	}
 	
@@ -20,9 +20,9 @@ public class Derrota extends BasicGameState {
 
 	public void render(GameContainer gc, StateBasedGame arg1, Graphics g)
 			throws SlickException {
-		g.setColor(Color.red);
+		g.setColor(Color.blue);
 		
-		g.fillOval(gc.getWidth() / 2 - tam / 2, gc.getHeight() / 2 - tam / 2, tam, tam);
+		g.fillRect(gc.getWidth() / 2 - tam / 2, gc.getHeight() / 2 - tam / 2, tam, tam);
 	}
 
 	public void update(GameContainer arg0, StateBasedGame sbg, int fps)
