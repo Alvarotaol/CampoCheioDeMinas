@@ -32,7 +32,9 @@ public class Grade {
 				if(c.getEstado(i, j) == 1){
 					g.drawString("" + c.getCampo(i, j), i*dimq + x + dimq / 4, j*dimq + y + dimq / 5);
 				} else if(c.getEstado(i, j) == 2) {
-					
+					g.setColor(Color.blue);
+					g.fillOval(i*dimq + x, j*dimq + y, dimq, dimq);
+					g.setColor(Color.lightGray);
 				} else {
 					if (grade[i][j].contains(mx, my)) {
 						g.setColor(Color.lightGray);
@@ -45,9 +47,24 @@ public class Grade {
 		}
 	}
 	
-	public void clicar(int mx, int my){
+	public void marcar(int mx, int my){
 		if(mx > x && mx < x + dimq*dimx && my > y && my < y + dimq*dimy){
-			c.abrir((mx - x)/dimq, (my-y)/dimq);
+			c.marcarBomba((mx - x)/dimq, (my-y)/dimq);
 		}
+	}
+	/**
+	 * @param mx x do mouse
+	 * @param my y do mouse
+	 * @return true se o usuário clicou em bomba
+	 */
+	public boolean clicar(int mx, int my){
+		if(mx > x && mx < x + dimq*dimx && my > y && my < y + dimq*dimy){
+			return c.abrir((mx - x)/dimq, (my-y)/dimq);
+		}
+		return false;
+	}
+	
+	public int getResto(){
+		return c.getResto();
 	}
 }

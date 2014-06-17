@@ -14,18 +14,18 @@ public class MenuEstado extends BasicGameState {
 	private final int estado;
 	private final int largura = 250, altura = 50;
 	private int n, verm;
-	private Input in;
-	private StateBasedGame psbg;
+	private boolean clicado;
 	
 	public MenuEstado(int estado) {
 		this.estado = estado;
+		clicado = false;
 	}
 	
 	public void init(GameContainer gc, StateBasedGame sbg)
 			throws SlickException {
-		in = gc.getInput();
+		//in = gc.getInput();
 		novo = new Rectangle(gc.getWidth()/2 - largura/2, gc.getHeight()/2 - altura/2, largura, altura);
-		psbg = sbg;
+		//psbg = sbg;
 	}
 
 	public void render(GameContainer gc, StateBasedGame arg1, Graphics g)
@@ -35,13 +35,12 @@ public class MenuEstado extends BasicGameState {
 		g.fill(novo);
 		g.setColor(Color.darkGray);
 		g.drawString("Nova Partida", novo.getCenterX() - 50, novo.getCenterY() - 7);
-		g.drawString("V = " + n, 10, 100);
 	}
 
 	public void update(GameContainer gc, StateBasedGame sbg, int fps)
 			throws SlickException {
 		n = fps;
-		if(novo.contains(in.getMouseX(), in.getMouseY())){
+		if(novo.contains(gc.getInput().getMouseX(), gc.getInput().getMouseY())){
 			verm += fps * 2.5;
 			if (verm > 200){
 				verm = 200;
@@ -52,14 +51,20 @@ public class MenuEstado extends BasicGameState {
 				verm = 0;
 			}
 		}
+		if(clicado){
+			clicado = false;
+			sbg.getState(1).init(gc, sbg);
+			sbg.enterState(1); //Sei que não é recomendável
+		}
 	}
 
 	@Override
 	public void mouseClicked(int botão, int x, int y, int cont){
 		if(botão == Input.MOUSE_LEFT_BUTTON){
-			psbg.enterState(1); //Sei que não é recomendável
+			clicado = true;
 		}
 	}
+	
 	@Override
 	public int getID() {
 		return estado;

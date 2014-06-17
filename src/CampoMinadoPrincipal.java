@@ -3,6 +3,7 @@ import org.newdawn.slick.geom.*;
 import org.newdawn.slick.state.StateBasedGame;
 import org.lwjgl.*;
 
+import controle.Derrota;
 import controle.JogoEstado;
 import controle.MenuEstado;
 
@@ -12,6 +13,7 @@ public class CampoMinadoPrincipal extends StateBasedGame {
 		super(title);
 		this.addState(new MenuEstado(0));
 		this.addState(new JogoEstado(1));
+		this.addState(new Derrota(2));
 	}
 	
 	public static void main(String[] args) {

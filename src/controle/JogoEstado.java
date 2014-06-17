@@ -4,19 +4,19 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
-import org.newdawn.slick.geom.Circle;
-import org.newdawn.slick.geom.Vector2f;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
 public class JogoEstado extends BasicGameState{
 	private final int estado;
+	private boolean derrota;
 	public Grade grade;
 	public int dx = 16, dy = 16;
 	public Input in;
 	
 	public JogoEstado(int estado) {
 		this.estado = estado;
+		derrota = false;
 	}
 	
 	public void init(GameContainer gc, StateBasedGame arg1)
@@ -27,18 +27,25 @@ public class JogoEstado extends BasicGameState{
 
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics g)
 			throws SlickException {
+		g.drawString("" + grade.getResto(), 100, 10);
 		grade.desenhar(in.getMouseX(), in.getMouseY(), g);
 	}
 
-	public void update(GameContainer arg0, StateBasedGame arg1, int arg2)
+	public void update(GameContainer gc, StateBasedGame sbg, int arg2)
 			throws SlickException {
-		
+		if(derrota){
+			sbg.enterState(2); //Derrota
+		}
 	}
 
 	@Override
 	public void mouseClicked(int botão, int x, int y, int cont){
 		if(botão == Input.MOUSE_LEFT_BUTTON){
-			grade.clicar(in.getMouseX(), in.getMouseY());
+			if(grade.clicar(x, y)){
+				derrota = true;
+			}
+		} else {
+			grade.marcar(x, y);
 		}
 	}
 	

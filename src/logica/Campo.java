@@ -6,8 +6,9 @@ import java.util.ArrayDeque;
 
 
 public class Campo {
-	private int x, y, bombas;
-	private int[][] estado, grade;
+	private int x, y, bombas, resto;
+	public int[][] estado, grade;
+	public static Campo inst;
 	
 	public Campo(int x, int y, int bombas) {
 		this.x = x;
@@ -15,13 +16,21 @@ public class Campo {
 		this.bombas = bombas;
 		grade = new int[x][y];
 		estado = new int[x][y];
+		inst = this;
 	}
 
-	public void abrir(int i, int j) {
+	public boolean abrir(int i, int j) {
+		if(estado[i][j] == 2) return false;
+		if(grade[i][j] == 9){
+			estado[i][j] = 1;
+			resto--;
+			return true;
+		}
 		ArrayDeque<Point> fila = new ArrayDeque<Point>();
 		fila.addLast(new Point(i, j));
 		while(!fila.isEmpty()){
 			Point p = fila.pollFirst();
+			if(estado[p.x][p.y] == 0) resto--;
 			estado[p.x][p.y] = 1;
 			if(grade[p.x][p.y] == 0){
 				if(p.x > 0 && estado[p.x-1][p.y] == 0) fila.addLast(new Point(p.x-1, p.y));
@@ -30,11 +39,14 @@ public class Campo {
 				if(p.y < y-1 && estado[p.x][p.y+1] == 0) fila.addLast(new Point(p.x, p.y + 1));
 			}
 		}
+		return false;
 	}
 	
 	public void marcarBomba(int i, int j){
 		if(estado[i][j] == 0){
 			estado[i][j] = 2;
+		} else if(estado[i][j] == 2){
+			estado[i][j] = 0;
 		}
 	}
 	
@@ -46,6 +58,9 @@ public class Campo {
 		return grade[i][j];
 	}
 	
+	public int getResto(){
+		return resto;
+	}
 	public void novoJogo(){
 		int i = 0;
 		Random gerar = new Random();
@@ -66,6 +81,7 @@ public class Campo {
 				}
 			}
 		}
+		resto = x*y;
 	}
 	
 	private void somar(int i, int j){
