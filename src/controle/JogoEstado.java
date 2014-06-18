@@ -9,7 +9,7 @@ import org.newdawn.slick.state.StateBasedGame;
 
 public class JogoEstado extends BasicGameState{
 	private final int estado;
-	private boolean derrota, vitoria;
+	private boolean derrota, vitória;
 	public Grade grade;
 	public int dx = 16, dy = 16;
 	public Input in;
@@ -22,6 +22,8 @@ public class JogoEstado extends BasicGameState{
 	public void init(GameContainer gc, StateBasedGame arg1)
 			throws SlickException {
 		in = gc.getInput();
+		System.out.println("Iniciando jogo");
+		derrota = vitória = false;
 		grade = new Grade(10, gc.getHeight() - (gc.getWidth() - 20) * dy / dx - 10, dx, dy, (gc.getWidth() - 10) / dx);
 	}
 
@@ -36,7 +38,7 @@ public class JogoEstado extends BasicGameState{
 		if(derrota){
 			sbg.enterState(2); //Derrota
 		}
-		if(vitoria){
+		if(vitória){
 			sbg.enterState(3); //Vitória
 		}
 	}
@@ -48,7 +50,7 @@ public class JogoEstado extends BasicGameState{
 				derrota = true;
 			}
 			if (grade.venceu()) {
-				vitoria = true;
+				vitória = true;
 			}
 		} else {
 			grade.marcar(x, y);

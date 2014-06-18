@@ -61,7 +61,9 @@ public class MenuEstado extends BasicGameState {
 	@Override
 	public void mouseClicked(int botão, int x, int y, int cont){
 		if(botão == Input.MOUSE_LEFT_BUTTON){
-			clicado = true;
+			if(novo.contains(x, y)){
+				clicado = true;
+			}
 		}
 	}
 	
