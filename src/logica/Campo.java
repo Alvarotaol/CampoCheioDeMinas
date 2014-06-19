@@ -33,7 +33,9 @@ public class Campo {
 			if(estado[p.x][p.y] == 0) resto--;
 			estado[p.x][p.y] = 1;
 			if(grade[p.x][p.y] == 0){
-				if(p.x > 0 && estado[p.x-1][p.y] == 0) fila.addLast(new Point(p.x-1, p.y));
+				if(p.x > 0 && estado[p.x-1][p.y] == 0) {
+					fila.addLast(new Point(p.x-1, p.y));
+				}
 				if(p.x < x-1 && estado[p.x+1][p.y] == 0) fila.addLast(new Point(p.x+1, p.y));
 				if(p.y > 0 && estado[p.x][p.y-1] == 0) fila.addLast(new Point(p.x, p.y - 1));
 				if(p.y < y-1 && estado[p.x][p.y+1] == 0) fila.addLast(new Point(p.x, p.y + 1));
@@ -63,7 +65,7 @@ public class Campo {
 	}
 	
 	public int getBombas(){
-		return bombas;
+		return bombas;	
 	}
 	
 	public void novoJogo(){

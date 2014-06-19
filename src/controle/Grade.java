@@ -9,7 +9,7 @@ public class Grade {
 	Rectangle[][] grade;
 	Campo c;
 	public static int x, y, dimx, dimy, dimq;
-	
+	private Image bomba;
 	public Grade(int x, int y, int dx, int dy, int dq) {
 		this.x = x;
 		this.y = y;
@@ -24,6 +24,12 @@ public class Grade {
 		}
 		c = new Campo(dx, dy, dx*dy/10);
 		c.novoJogo();
+		
+		try {
+			bomba = new Image("img/bomba.png");
+		} catch (SlickException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public void desenhar(int mx, int my, Graphics g){
@@ -33,7 +39,8 @@ public class Grade {
 					g.drawString("" + c.getCampo(i, j), i*dimq + x + dimq / 4, j*dimq + y + dimq / 5);
 				} else if(c.getEstado(i, j) == 2) {
 					g.setColor(Color.blue);
-					g.fillOval(i*dimq + x, j*dimq + y, dimq, dimq);
+					//g.fillOval(i*dimq + x, j*dimq + y, dimq, dimq);
+					bomba.draw(i*dimq + x + dimq*(1 - bomba.getWidth()/39f)/2, j*dimq + y + 1, (dimq - 3)/39.0f);//39 é o tamanho original da imagem
 					g.setColor(Color.lightGray);
 				} else {
 					if (grade[i][j].contains(mx, my)) {
