@@ -3,10 +3,10 @@ package controle;
 import logica.Campo;
 
 import org.newdawn.slick.*;
-import org.newdawn.slick.geom.Rectangle;
+import org.newdawn.slick.geom.*;
 
 public class Grade {
-	Rectangle[][] grade;
+	Circle[][] grade;
 	Campo c;
 	public static int x, y, dimx, dimy, dimq;
 	private Image bomba;
@@ -16,10 +16,10 @@ public class Grade {
 		dimx = dx;
 		dimy = dy;
 		dimq = dq;
-		grade = new Rectangle[dx][dy];
+		grade = new Circle[dx][dy];
 		for (int i = 0; i < dx; i++) {
 			for (int j = 0; j < dy; j++) {
-				grade[i][j] = new Rectangle(x + i*dq, y + j*dq, dq, dq);
+				grade[i][j] = new Circle(x + i*dq, y + j*dq, dq/2);
 			}
 		}
 		c = new Campo(dx, dy, dx*dy/10);
@@ -36,7 +36,9 @@ public class Grade {
 		for (int i = 0; i < dimx; i++) {
 			for (int j = 0; j < dimy; j++) {
 				if(c.getEstado(i, j) == 1){
-					g.drawString("" + c.getCampo(i, j), i*dimq + x + dimq / 4, j*dimq + y + dimq / 5);
+					if(c.getCampo(i, j) != 0) {
+						g.drawString("" + c.getCampo(i, j), i*dimq + x + dimq / 4, j*dimq + y + dimq / 5);
+					}
 				} else if(c.getEstado(i, j) == 2) {
 					g.setColor(Color.blue);
 					//g.fillOval(i*dimq + x, j*dimq + y, dimq, dimq);
@@ -47,7 +49,8 @@ public class Grade {
 						g.setColor(Color.lightGray);
 						g.fill(grade[i][j]);
 					} else {
-						g.draw(grade[i][j]);
+						g.setColor(Color.darkGray);
+						g.fill(grade[i][j]);
 					}
 				}
 			}
