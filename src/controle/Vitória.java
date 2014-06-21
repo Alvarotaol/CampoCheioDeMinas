@@ -1,7 +1,5 @@
 package controle;
 
-import logica.Campo;
-
 import org.newdawn.slick.*;
 import org.newdawn.slick.state.*;
 
