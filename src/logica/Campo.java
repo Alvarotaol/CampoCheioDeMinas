@@ -28,17 +28,46 @@ public class Campo {
 		}
 		ArrayDeque<Point> fila = new ArrayDeque<Point>();
 		fila.addLast(new Point(i, j));
+		estado[i][j] = 1;
 		while(!fila.isEmpty()){
 			Point p = fila.pollFirst();
-			if(estado[p.x][p.y] == 0) resto--;
-			estado[p.x][p.y] = 1;
+			resto--;
 			if(grade[p.x][p.y] == 0){
 				if(p.x > 0 && estado[p.x-1][p.y] == 0) {
 					fila.addLast(new Point(p.x-1, p.y));
+					estado[p.x-1][p.y] = 1;
+					if(p.y > 0 && estado[p.x-1][p.y-1] == 0) {
+						fila.addLast(new Point(p.x-1, p.y - 1));
+						estado[p.x-1][p.y-1] = 1;
+					}
+					if(p.y < y-1 && estado[p.x-1][p.y+1] == 0) {
+						fila.addLast(new Point(p.x-1, p.y + 1));
+						estado[p.x-1][p.y+1] = 1;
+					}
 				}
-				if(p.x < x-1 && estado[p.x+1][p.y] == 0) fila.addLast(new Point(p.x+1, p.y));
-				if(p.y > 0 && estado[p.x][p.y-1] == 0) fila.addLast(new Point(p.x, p.y - 1));
-				if(p.y < y-1 && estado[p.x][p.y+1] == 0) fila.addLast(new Point(p.x, p.y + 1));
+				
+				if(p.x < x-1 && estado[p.x+1][p.y] == 0) {
+					fila.addLast(new Point(p.x+1, p.y));
+					estado[p.x+1][p.y] = 1;
+					if(p.y > 0 && estado[p.x+1][p.y-1] == 0) {
+						fila.addLast(new Point(p.x+1, p.y - 1));
+						estado[p.x+1][p.y-1] = 1;
+					}
+					if(p.y < y-1 && estado[p.x+1][p.y+1] == 0) {
+						fila.addLast(new Point(p.x+1, p.y + 1));
+						estado[p.x+1][p.y+1] = 1;
+					}
+				}
+				
+				if(p.y > 0 && estado[p.x][p.y-1] == 0) {
+					fila.addLast(new Point(p.x, p.y - 1));
+					estado[p.x][p.y-1] = 1;
+				}
+				
+				if(p.y < y-1 && estado[p.x][p.y+1] == 0) {
+					fila.addLast(new Point(p.x, p.y + 1));
+					estado[p.x][p.y+1] = 1;
+				}
 			}
 		}
 		return false;
@@ -118,7 +147,7 @@ public class Campo {
 		}
 	}
 	
-	public static void main(String[] args) {
+	/*public static void main(String[] args) {
 		Campo c = new Campo(5, 5, 10);
 		c.novoJogo();
 		int cont = 0;
@@ -132,5 +161,5 @@ public class Campo {
 			System.out.println("-> " + cont);
 		}
 		c.abrir(0, 0);
-	}
+	}*/
 }
